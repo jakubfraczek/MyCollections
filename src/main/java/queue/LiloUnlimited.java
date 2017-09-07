@@ -2,34 +2,36 @@ package queue;
 
 import java.util.Arrays;
 
-public class LiloUnlimited<T> implements Lilo<T> {
+public class LiloUnlimited<T> implements Lifo<T> {
 
 	private int size = 10;
 	private int firstFree;
-	private Object[] lilo;
+	private Object[] lifo;
 	
 	public LiloUnlimited() {
-		lilo = new Object[size];
+		lifo = new Object[size];
 	}
 	
 	public boolean add(T t) {
 		if (firstFree < 10){
-			lilo[firstFree++] = t;
+			lifo[firstFree++] = t;
 			return true;
 		} else {
 			size *= 2;
-			lilo = Arrays.copyOf(lilo, size);
-			lilo[firstFree++] = t;
+			lifo = Arrays.copyOf(lifo, size);
+			lifo[firstFree++] = t;
 			return true;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public T poll() {
-		return (T) lilo[--firstFree];
+		return (T) lifo[--firstFree];
 	}
 
+	@SuppressWarnings("unchecked")
 	public T peek() {
-		return (T) lilo[firstFree - 1];
+		return (T) lifo[firstFree - 1];
 	}
 
 	public int size() {

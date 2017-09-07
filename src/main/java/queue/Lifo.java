@@ -1,6 +1,6 @@
 package queue;
 
-public interface Lilo<T>{
+public interface Lifo<T> {
 	
 	public boolean add(T t);
 	public T poll();
